@@ -8,7 +8,7 @@ import type { Hero } from '../types/hero';
 
 const RES_OLD = 'https://www.marvelrivals.com/pc/gw/5da825b19a6a/heros';
 
-export const heroes: Hero[] = [
+const ROSTER: Hero[] = [
   {
     id: '84b3b29a-326a-443d-bf18-4ebb9f2948fc',
     slug: 'black-cat',
@@ -375,3 +375,7 @@ export const heroes: Hero[] = [
     portraitUrl: `${RES_OLD}/kp_2.png`,
   },
 ];
+
+export const heroes: Hero[] = [...ROSTER].sort((a, b) =>
+  a.name.localeCompare(b.name),
+);
