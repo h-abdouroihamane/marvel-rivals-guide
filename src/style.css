@@ -1,0 +1,142 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@font-face {
+  font-family: 'Refrigerator Deluxe';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/RefrigeratorDeluxe-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Refrigerator Deluxe';
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/RefrigeratorDeluxe-Heavy.woff2') format('woff2');
+}
+
+@theme {
+  --font-display:
+    'Refrigerator Deluxe', 'Saira Condensed', 'Oswald', sans-serif;
+  --font-body: 'Nunito Sans', system-ui, sans-serif;
+
+  --color-bg: #e8ecf7;
+  --color-bg-soft: #c9d2ea;
+  --color-surface: #181a26;
+  --color-surface-2: #1e202c;
+  --color-plate: #181a26;
+  --color-text: #181a26;
+  --color-text-muted: #7c81a9;
+  --color-text-on-dark: #f3f5fb;
+  --color-text-on-dark-muted: #8e96a9;
+  --color-accent: #fcd92d;
+  --color-brand: #d71f2a;
+  --color-vanguard: #5b8def;
+  --color-duelist: #e6494e;
+  --color-strategist: #5ee0c7;
+  --color-line: rgba(24, 26, 38, 0.08);
+}
+
+:root {
+  font-size: 16px;
+  color-scheme: light;
+}
+
+.dark {
+  --color-bg: #0b0d14;
+  --color-bg-soft: #181a26;
+  --color-surface: #1e202c;
+  --color-surface-2: #2a2c3a;
+  --color-plate: #06080f;
+  --color-text: #f3f5fb;
+  --color-text-muted: #8e96a9;
+  --color-text-on-dark: #f3f5fb;
+  --color-text-on-dark-muted: #8e96a9;
+  --color-line: rgba(243, 245, 251, 0.06);
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.02em;
+  }
+
+  .clip-card-plate {
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% 100%,
+      28px 100%,
+      0 calc(100% - 28px)
+    );
+  }
+
+  .clip-card-portrait {
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - 28px),
+      calc(100% - 28px) 100%,
+      0 100%
+    );
+  }
+
+  .bg-chevron-grid {
+    background-image:
+      linear-gradient(
+        135deg,
+        var(--color-line) 0,
+        var(--color-line) 1px,
+        transparent 1px,
+        transparent 14px
+      ),
+      linear-gradient(
+        45deg,
+        var(--color-line) 0,
+        var(--color-line) 1px,
+        transparent 1px,
+        transparent 14px
+      ),
+      radial-gradient(
+        ellipse at top,
+        var(--color-bg) 0%,
+        var(--color-bg-soft) 100%
+      );
+    background-size: 14px 14px, 14px 14px, 100% 100%;
+  }
+
+  .focus-ring {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-rise {
+  animation: card-rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}

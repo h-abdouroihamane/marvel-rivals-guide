@@ -1,0 +1,377 @@
+// Source: marvelrivals.com/heroes/index.html (official roster snapshot).
+// Names + role tags + UUIDs transcribed verbatim from the page's
+// data-id / data-tag / data-name attributes. Portrait URLs point at
+// the official CDN; if a URL 404s, the card falls back to an
+// initials placeholder (see HeroCard.vue).
+
+import type { Hero } from '../types/hero';
+
+const RES_OLD = 'https://www.marvelrivals.com/pc/gw/5da825b19a6a/heros';
+
+export const heroes: Hero[] = [
+  {
+    id: '84b3b29a-326a-443d-bf18-4ebb9f2948fc',
+    slug: 'black-cat',
+    name: 'BLACK CAT',
+    role: 'duelist',
+    portraitUrl:
+      'https://nie.res.netease.com/r/pic/20260417/4e0ad911-844b-4af5-9fa6-e4ec63290963.png',
+  },
+  {
+    id: 'bff0c7c6-3042-4384-8735-7ec6354baa1e',
+    slug: 'white-fox',
+    name: 'WHITE FOX',
+    role: 'strategist',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20260320/e8aabdfd-662f-4f9f-a8f9-fae2b1d28ad1.png',
+  },
+  {
+    id: '91b586e3-4d55-455c-bd7d-69fbe0563d26',
+    slug: 'elsa-bloodstone',
+    name: 'ELSA BLOODSTONE',
+    role: 'duelist',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20260213/800dd6c8-5f41-4a13-bf6a-c81a0adf6916.png',
+  },
+  {
+    id: '3ef6b679-d1b4-4757-a8ee-0ea53379c754',
+    slug: 'deadpool',
+    name: 'DEADPOOL',
+    role: 'flex',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20260116/02b86800-05fe-43cd-8c64-f609870b2dd0.png',
+  },
+  {
+    id: 'deb6b426-c97e-4449-b345-4d7131336a64',
+    slug: 'rogue',
+    name: 'ROGUE',
+    role: 'vanguard',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20251212/d8271cac-59cc-4a60-9f2a-a8919a762e98.png',
+  },
+  {
+    id: '46e47f1b-a312-4686-ae9f-328318c544dd',
+    slug: 'gambit',
+    name: 'GAMBIT',
+    role: 'strategist',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20251115/3b67eab9-6ad3-4668-8d8a-2436759b30f3.png',
+  },
+  {
+    id: '043108d4-fd6b-4884-aee1-1ccbefb79790',
+    slug: 'daredevil',
+    name: 'DAREDEVIL',
+    role: 'duelist',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20251010/8164eaa4-3d01-4b22-9138-372675826567.png',
+  },
+  {
+    id: '03af29d0-1a53-4077-9062-8201ed327635',
+    slug: 'angela',
+    name: 'ANGELA',
+    role: 'vanguard',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20250912/e9d2e592-d36b-4629-af7b-2701e0904c8e.png',
+  },
+  {
+    id: '4bb813d7-30ab-4c36-bd05-b9d299e4c1e3',
+    slug: 'blade',
+    name: 'BLADE',
+    role: 'duelist',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20250808/0d3a4fe6-f64a-49a7-9d4d-4d26a77e4d5c.png',
+  },
+  {
+    id: 'f2521fc5-3180-477d-945c-403fa65fd7f5',
+    slug: 'phoenix',
+    name: 'PHOENIX',
+    role: 'duelist',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20250711/7d643548-6514-435f-921c-8123e4ca3bb3.png',
+  },
+  {
+    id: 'dddc5632-ed86-4312-b8da-1616183fd909',
+    slug: 'ultron',
+    name: 'ULTRON',
+    role: 'strategist',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20250529/ce46ce50-3221-4265-98b1-3cec00887dae.png',
+  },
+  {
+    id: '011f4b5b-f020-4187-93f5-8a64df44ad48',
+    slug: 'emma-frost',
+    name: 'EMMA FROST',
+    role: 'vanguard',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20250408/ecdf660a-5dc5-4d34-9deb-69cc16b123f5.png',
+  },
+  {
+    id: '10bfa106-6a69-4dac-85f5-8b327e98e566',
+    slug: 'the-thing',
+    name: 'THE THING',
+    role: 'vanguard',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20250220/8c9ac64a-b10c-4b5e-9347-639a9a729d65.png',
+  },
+  {
+    id: 'f0ec2612-649f-48bb-a18b-48ef1fe9ba56',
+    slug: 'human-torch',
+    name: 'HUMAN TORCH',
+    role: 'duelist',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20250220/881f61ca-101c-43c4-825e-75fa91e88728.png',
+  },
+  {
+    id: '9cc13662-5669-460f-adbf-f53aba63bb46',
+    slug: 'invisible-woman',
+    name: 'INVISIBLE WOMAN',
+    role: 'strategist',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20250109/17701da8-10d1-4742-915c-6343caa48072.png',
+  },
+  {
+    id: 'fccfe09c-c34c-40d6-b546-a34386612729',
+    slug: 'mister-fantastic',
+    name: 'MISTER FANTASTIC',
+    role: 'duelist',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20250109/f3237262-e11b-4329-a571-59a3d5a777a4.png',
+  },
+  {
+    id: '4ed51741-f094-46ef-b5ca-bb2025b15c50',
+    slug: 'squirrel-girl',
+    name: 'SQUIRREL GIRL',
+    role: 'duelist',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20241201/676d5f65-2c50-41ee-8034-445ccbe1674d.png',
+  },
+  {
+    id: 'baa0fe39-41ff-42f3-b48f-3e453317503a',
+    slug: 'black-widow',
+    name: 'BLACK WIDOW',
+    role: 'duelist',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20241204/a6ba9730-0f63-4eb7-b5f4-f5b7d278bed2.png',
+  },
+  {
+    id: 'a9b308ab-f0d8-412a-9362-e60091e57ded',
+    slug: 'wolverine',
+    name: 'WOLVERINE',
+    role: 'duelist',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20241204/f83f6738-96eb-44f7-b6b1-a40588a78642.png',
+  },
+  {
+    id: '5b5a8c7a-c9c0-4f4c-89a3-dae465db8c7f',
+    slug: 'cloak-and-dagger',
+    name: 'CLOAK & DAGGER',
+    role: 'strategist',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20241204/f269efac-a664-4ae6-83d8-a6484e895b99.png',
+  },
+  {
+    id: 'c90562b1-0bf1-4f90-94ed-d24a7650a2b0',
+    slug: 'iron-fist',
+    name: 'IRON FIST',
+    role: 'duelist',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20241201/231c4083-7ae5-4e6b-b014-56bfc2b7aff5.png',
+  },
+  {
+    id: '1c8d092c-74b9-4988-82ba-151a4b4f1308',
+    slug: 'psylocke',
+    name: 'PSYLOCKE',
+    role: 'duelist',
+    portraitUrl:
+      'https://r.res.easebar.com/pic/20241127/4d35d79a-9bd7-4c81-baaa-44ec88797961.png',
+  },
+  {
+    id: 'e7e0573d-ac83-4d1e-b286-7c7e4c79fc81',
+    slug: 'hawkeye',
+    name: 'HAWKEYE',
+    role: 'duelist',
+    portraitUrl: `${RES_OLD}/kp_27.png`,
+  },
+  {
+    id: 'ef114434-6c2a-48ff-a4f7-05dc278aedde',
+    slug: 'iron-man',
+    name: 'IRON MAN',
+    role: 'duelist',
+    portraitUrl: `${RES_OLD}/kp_6.png`,
+  },
+  {
+    id: '7dc8b934-fe12-49ae-ac3b-7d7c3a688443',
+    slug: 'moon-knight',
+    name: 'MOON KNIGHT',
+    role: 'duelist',
+    portraitUrl: `${RES_OLD}/kp_26.png`,
+  },
+  {
+    id: 'afbd915c-3505-4660-9815-bebe2c96370b',
+    slug: 'namor',
+    name: 'NAMOR',
+    role: 'duelist',
+    portraitUrl: `${RES_OLD}/kp_20.png`,
+  },
+  {
+    id: 'f052a66a-d95a-4062-911a-0c4cd35386ac',
+    slug: 'star-lord',
+    name: 'STAR-LORD',
+    role: 'duelist',
+    portraitUrl: `${RES_OLD}/kp_16.png`,
+  },
+  {
+    id: '1d3f08cf-abee-4eb9-b2fd-31ce9947e5a1',
+    slug: 'scarlet-witch',
+    name: 'SCARLET WITCH',
+    role: 'duelist',
+    portraitUrl: `${RES_OLD}/kp_15.png`,
+  },
+  {
+    id: '7b26015b-e5f2-4d01-983b-885540b6236d',
+    slug: 'winter-soldier',
+    name: 'WINTER SOLDIER',
+    role: 'duelist',
+    portraitUrl: `${RES_OLD}/kp_25.png`,
+  },
+  {
+    id: 'dd9a323f-da66-4ba8-9e37-1d3e8398a9b4',
+    slug: 'magik',
+    name: 'MAGIK',
+    role: 'duelist',
+    portraitUrl: `${RES_OLD}/kp_12.png`,
+  },
+  {
+    id: 'feef5830-45b0-435e-8f7b-829241918b4d',
+    slug: 'spider-man',
+    name: 'SPIDER-MAN',
+    role: 'duelist',
+    portraitUrl: `${RES_OLD}/kp_13.png`,
+  },
+  {
+    id: 'fa01bc79-aba9-4559-9a0e-fc4fb5666f0a',
+    slug: 'black-panther',
+    name: 'BLACK PANTHER',
+    role: 'duelist',
+    portraitUrl: `${RES_OLD}/kp_1.png`,
+  },
+  {
+    id: '7db8153e-f7fd-4889-b234-af4e06a0cabe',
+    slug: 'hela',
+    name: 'HELA',
+    role: 'duelist',
+    portraitUrl: `${RES_OLD}/kp_5.png`,
+  },
+  {
+    id: '93784596-43d9-42f9-bb0c-86a5140f4917',
+    slug: 'storm',
+    name: 'STORM',
+    role: 'duelist',
+    portraitUrl: `${RES_OLD}/kp_17.png`,
+  },
+  {
+    id: '9471f35c-3f81-4ae2-9726-b2944dd431e9',
+    slug: 'hulk',
+    name: 'HULK',
+    role: 'vanguard',
+    portraitUrl: `${RES_OLD}/kp_19.png`,
+  },
+  {
+    id: '49e078be-c0c3-4efc-ad01-9c6f4b4f043e',
+    slug: 'jeff-the-land-shark',
+    name: 'JEFF THE LAND SHARK',
+    role: 'strategist',
+    portraitUrl: `${RES_OLD}/kp_23.png`,
+  },
+  {
+    id: '77ad32c5-b42c-405d-afeb-bd452681b8e8',
+    slug: 'the-punisher',
+    name: 'THE PUNISHER',
+    role: 'duelist',
+    portraitUrl: `${RES_OLD}/kp_4.png`,
+  },
+  {
+    id: '1077f07b-2178-49d3-80be-d915de78d17c',
+    slug: 'luna-snow',
+    name: 'LUNA SNOW',
+    role: 'strategist',
+    portraitUrl: `${RES_OLD}/kp_18.png`,
+  },
+  {
+    id: 'ef4511de-a2ff-43f0-b061-d915f0ccb37d',
+    slug: 'adam-warlock',
+    name: 'ADAM WARLOCK',
+    role: 'strategist',
+    portraitUrl: `${RES_OLD}/kp_21.png`,
+  },
+  {
+    id: 'e1fb7cc4-a1a0-473b-8809-68b04dcc9420',
+    slug: 'rocket-raccoon',
+    name: 'ROCKET RACCOON',
+    role: 'strategist',
+    portraitUrl: `${RES_OLD}/kp_8.png`,
+  },
+  {
+    id: 'c6011abe-8d17-4962-ac88-7232dc3d208f',
+    slug: 'loki',
+    name: 'LOKI',
+    role: 'strategist',
+    portraitUrl: `${RES_OLD}/kp_7.png`,
+  },
+  {
+    id: 'bbb138f7-80d3-4db4-a608-4ee2d29c5fc0',
+    slug: 'mantis',
+    name: 'MANTIS',
+    role: 'strategist',
+    portraitUrl: `${RES_OLD}/kp_9.png`,
+  },
+  {
+    id: '3929765b-c856-44c9-b97a-eb965f3fbdf6',
+    slug: 'peni-parker',
+    name: 'PENI PARKER',
+    role: 'vanguard',
+    portraitUrl: `${RES_OLD}/kp_10.png`,
+  },
+  {
+    id: 'fcddbb53-6a99-45f6-9cc8-65c68edd96e0',
+    slug: 'thor',
+    name: 'THOR',
+    role: 'vanguard',
+    portraitUrl: `${RES_OLD}/kp_22.png`,
+  },
+  {
+    id: '2dffcc89-3280-4d43-907a-646eea9d3a74',
+    slug: 'magneto',
+    name: 'MAGNETO',
+    role: 'vanguard',
+    portraitUrl: `${RES_OLD}/kp_11.png`,
+  },
+  {
+    id: 'fa12017d-641d-4734-b459-187c2a6cdeb1',
+    slug: 'venom',
+    name: 'VENOM',
+    role: 'vanguard',
+    portraitUrl: `${RES_OLD}/kp_14.png`,
+  },
+  {
+    id: 'f29f3cf1-e8dd-4188-acce-e519dd94206d',
+    slug: 'groot',
+    name: 'GROOT',
+    role: 'vanguard',
+    portraitUrl: `${RES_OLD}/kp_3.png`,
+  },
+  {
+    id: 'b3e3bc0b-0a15-4fa8-8139-e08f7fcd9beb',
+    slug: 'captain-america',
+    name: 'CAPTAIN AMERICA',
+    role: 'vanguard',
+    portraitUrl: `${RES_OLD}/kp_24.png`,
+  },
+  {
+    id: '692c786c-08f4-4502-9803-a55f3bc8f83b',
+    slug: 'doctor-strange',
+    name: 'DOCTOR STRANGE',
+    role: 'vanguard',
+    portraitUrl: `${RES_OLD}/kp_2.png`,
+  },
+];
