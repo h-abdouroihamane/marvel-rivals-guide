@@ -1,26 +1,11 @@
 <!--
   Aesthetic: tactical-comic / chevron HUD.
-  Top nav mirroring the in-game shell: HOME / PLAY / SEASON /
-  HEROES / STORE / TOURNAMENT / GALLERY in heavy condensed caps,
-  signal-yellow underline on the active item, theme toggle on the
-  far right.
+  Top nav: Rivals wordmark on the left, theme toggle on the right.
 -->
 <script setup lang="ts">
 import { useAppearance } from '../composables/useAppearance';
 
 const { appearance, toggle } = useAppearance();
-
-const items = [
-  { key: 'home', label: 'Home' },
-  { key: 'play', label: 'Play' },
-  { key: 'season', label: 'Season' },
-  { key: 'heroes', label: 'Heroes' },
-  { key: 'store', label: 'Store' },
-  { key: 'tournament', label: 'Tournament' },
-  { key: 'gallery', label: 'Gallery' },
-] as const;
-
-const active = 'heroes';
 </script>
 
 <template>
@@ -36,35 +21,11 @@ const active = 'heroes';
       aria-label="Primary"
     >
       <span
-        class="mr-6 font-display text-2xl font-black uppercase
+        class="font-display text-2xl font-black uppercase
                tracking-tight text-[color:var(--color-accent)]"
       >
         Rivals
       </span>
-      <a
-        v-for="item in items"
-        :key="item.key"
-        href="#"
-        :aria-current="item.key === active ? 'page' : undefined"
-        class="relative px-4 py-2 font-display text-sm font-bold
-               uppercase tracking-widest transition
-               hover:text-[color:var(--color-accent)]
-               focus:outline-none focus-visible:ring-2
-               focus-visible:ring-[color:var(--color-accent)]"
-        :class="
-          item.key === active
-            ? 'text-[color:var(--color-accent)]'
-            : 'text-[color:var(--color-text-on-dark-muted)]'
-        "
-      >
-        {{ item.label }}
-        <span
-          v-if="item.key === active"
-          aria-hidden="true"
-          class="absolute inset-x-3 -bottom-px h-0.5
-                 bg-[color:var(--color-accent)]"
-        />
-      </a>
       <span class="ml-auto"></span>
       <button
         type="button"
