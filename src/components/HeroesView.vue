@@ -1,24 +1,44 @@
 <!--
   Aesthetic: tactical-comic / chevron HUD.
   Hero roster page. Sub-tabs (HEROES / TEAM-UPS), the role filter
-  chip on the right, and the hero card grid with staggered entrance.
-  Background uses a periwinkle radial gradient + diagonal line
-  texture (chevron grid utility in style.css).
+  chip on the right, the hero card grid on the left, and a sticky
+  abilities panel on the right that mirrors the selected hero.
 -->
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { heroes } from '../data/heroes';
 import type { Role } from '../types/hero';
 import HeroCard from './HeroCard.vue';
+import HeroAbilitiesPanel from './HeroAbilitiesPanel.vue';
 import RoleFilter from './RoleFilter.vue';
 
 const subtab = ref<'heroes' | 'team-ups'>('heroes');
 const roleFilter = ref<Role | 'all'>('all');
+const selectedSlug = ref<string | null>(null);
 
 const visible = computed(() => {
   if (roleFilter.value === 'all') return heroes;
   return heroes.filter((h) => h.role === roleFilter.value);
 });
+
+const selectedHero = computed(() => {
+  if (!selectedSlug.value) return null;
+  return heroes.find((h) => h.slug === selectedSlug.value) ?? null;
+});
+
+// If the active filter hides the selected hero, clear the panel.
+watch(visible, (next) => {
+  if (
+    selectedSlug.value &&
+    !next.some((h) => h.slug === selectedSlug.value)
+  ) {
+    selectedSlug.value = null;
+  }
+});
+
+const onSelect = (slug: string) => {
+  selectedSlug.value = selectedSlug.value === slug ? null : slug;
+};
 </script>
 
 <template>
@@ -83,21 +103,33 @@ const visible = computed(() => {
         <RoleFilter v-model="roleFilter" />
       </div>
 
-      <!-- Heroes grid -->
-      <section
+      <!-- Heroes grid + abilities panel -->
+      <div
         v-if="subtab === 'heroes'"
-        aria-label="Heroes"
-        class="grid grid-cols-2 gap-4
-               sm:grid-cols-3 md:grid-cols-4
-               lg:grid-cols-5 xl:grid-cols-7"
+        class="flex flex-col gap-6 lg:flex-row"
       >
-        <HeroCard
-          v-for="(hero, index) in visible"
-          :key="hero.id"
-          :hero="hero"
-          :delay-ms="Math.min(index * 30, 600)"
-        />
-      </section>
+        <section
+          aria-label="Heroes"
+          class="grid flex-1 grid-cols-2 gap-4
+                 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5"
+        >
+          <HeroCard
+            v-for="(hero, index) in visible"
+            :key="hero.id"
+            :hero="hero"
+            :selected="hero.slug === selectedSlug"
+            :delay-ms="Math.min(index * 30, 600)"
+            @select="onSelect"
+          />
+        </section>
+
+        <div
+          class="lg:w-[360px] lg:flex-shrink-0"
+          :class="selectedHero ? 'block' : 'hidden lg:block'"
+        >
+          <HeroAbilitiesPanel :hero="selectedHero" />
+        </div>
+      </div>
 
       <!-- Team-Ups placeholder -->
       <section

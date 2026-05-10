@@ -1,6 +1,6 @@
 <!--
   Aesthetic: tactical-comic / chevron HUD.
-  - Type pairing: Saira Condensed (display) + Nunito Sans (body).
+  - Type pairing: Refrigerator Deluxe (display) + Nunito Sans (body).
   - Color: light periwinkle bg with dark navy plate; signal yellow
     (#fcd92d) for active state; role color for the small glyph.
   - Memorable element: diagonal chevron clip on portrait (bottom-right
@@ -17,6 +17,11 @@ import RoleIcon from './RoleIcon.vue';
 const props = defineProps<{
   hero: Hero;
   delayMs?: number;
+  selected?: boolean;
+}>();
+
+defineEmits<{
+  select: [slug: string];
 }>();
 
 const roleColorVar: Record<Hero['role'], string> = {
@@ -36,19 +41,26 @@ const initials = props.hero.name
 </script>
 
 <template>
-  <a
-    :href="`#/heroes/${hero.slug}`"
-    class="group card-rise relative block focus:outline-none"
-    :style="{ animationDelay: `${delayMs ?? 0}ms` }"
+  <button
+    type="button"
+    @click="$emit('select', hero.slug)"
+    :aria-pressed="selected"
     :aria-label="`${hero.name}, ${ROLE_LABEL[hero.role]}`"
+    class="group card-rise relative block w-full cursor-pointer
+           text-left focus:outline-none"
+    :style="{ animationDelay: `${delayMs ?? 0}ms` }"
   >
     <!-- Portrait pane -->
     <div
       class="clip-card-portrait relative aspect-[3/4] overflow-hidden
              bg-[color:var(--color-bg-soft)] transition
              group-hover:translate-y-[-2px]
-             group-focus-visible:ring-2 group-focus-visible:ring-[color:var(--color-accent)]
              dark:bg-[color:var(--color-surface)]"
+      :class="
+        selected
+          ? 'ring-4 ring-[color:var(--color-accent)] ring-offset-2 ring-offset-[color:var(--color-bg)] dark:ring-offset-[color:var(--color-bg)]'
+          : 'group-focus-visible:ring-2 group-focus-visible:ring-[color:var(--color-accent)]'
+      "
     >
       <img
         v-if="portraitOk"
@@ -129,5 +141,5 @@ const initials = props.hero.name
         <RoleIcon :role="hero.role" :size="18" />
       </span>
     </div>
-  </a>
+  </button>
 </template>
