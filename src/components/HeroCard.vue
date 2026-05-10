@@ -10,7 +10,7 @@
 -->
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { Hero } from '../types/hero';
+import type { Hero, Role } from '../types/hero';
 import { ROLE_LABEL } from '../types/hero';
 import RoleIcon from './RoleIcon.vue';
 
@@ -24,11 +24,10 @@ defineEmits<{
   select: [slug: string];
 }>();
 
-const roleColorVar: Record<Hero['role'], string> = {
+const roleColorVar: Record<Role, string> = {
   vanguard: 'var(--color-vanguard)',
   duelist: 'var(--color-duelist)',
   strategist: 'var(--color-strategist)',
-  flex: 'var(--color-accent)',
 };
 
 const portraitOk = ref(true);
@@ -38,6 +37,9 @@ const initials = props.hero.name
   .slice(0, 2)
   .map((w) => w[0])
   .join('');
+
+const roleLabel = (roles: Role[]) =>
+  roles.map((r) => ROLE_LABEL[r]).join(' / ');
 </script>
 
 <template>
@@ -45,7 +47,7 @@ const initials = props.hero.name
     type="button"
     @click="$emit('select', hero.slug)"
     :aria-pressed="selected"
-    :aria-label="`${hero.name}, ${ROLE_LABEL[hero.role]}`"
+    :aria-label="`${hero.name}, ${roleLabel(hero.roles)}`"
     class="group card-rise relative block w-full cursor-pointer
            text-left focus:outline-none"
     :style="{ animationDelay: `${delayMs ?? 0}ms` }"
@@ -134,11 +136,16 @@ const initials = props.hero.name
         {{ hero.name }}
       </span>
       <span
-        :style="{ color: roleColorVar[hero.role] }"
-        class="shrink-0"
-        :aria-label="ROLE_LABEL[hero.role]"
+        class="flex shrink-0 items-center gap-1"
+        :aria-label="roleLabel(hero.roles)"
       >
-        <RoleIcon :role="hero.role" :size="18" />
+        <RoleIcon
+          v-for="r in hero.roles"
+          :key="r"
+          :role="r"
+          :size="hero.roles.length > 1 ? 14 : 18"
+          :style="{ color: roleColorVar[r] }"
+        />
       </span>
     </div>
   </button>

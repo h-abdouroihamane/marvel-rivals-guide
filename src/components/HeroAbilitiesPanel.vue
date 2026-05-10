@@ -2,23 +2,24 @@
   Aesthetic: tactical-comic / chevron HUD.
   Sticky right-side dossier panel. Sections mirror the official
   marvelrivals.com hero detail layout (NORMAL ATTACK / ABILITIES /
-  TEAM-UP ABILITIES). Body copy is placeholder until the data
-  layer is wired.
+  TEAM-UP ABILITIES). Multi-role heroes (Deadpool) get a variant
+  tab row that swaps the active ability set. Body copy is
+  placeholder until the data layer is wired.
 -->
 <script setup lang="ts">
-import type { Hero } from '../types/hero';
-import { ROLE_LABEL } from '../types/hero';
+import { ref, watch } from 'vue';
+import type { Hero, Role } from '../types/hero';
+import { ROLE_LABEL, ROLE_LABEL_UPPER } from '../types/hero';
 import RoleIcon from './RoleIcon.vue';
 
-defineProps<{
+const props = defineProps<{
   hero: Hero | null;
 }>();
 
-const roleColorVar: Record<Hero['role'], string> = {
+const roleColorVar: Record<Role, string> = {
   vanguard: 'var(--color-vanguard)',
   duelist: 'var(--color-duelist)',
   strategist: 'var(--color-strategist)',
-  flex: 'var(--color-accent)',
 };
 
 const placeholderText =
@@ -38,6 +39,19 @@ const teamUps = [
   { name: 'Placeholder Team-Up', anchor: 'Anchor Hero' },
   { name: 'Second Synergy', anchor: 'Other Hero' },
 ];
+
+// Active variant for multi-role heroes. Resets to roles[0] whenever
+// the selected hero changes, so re-opening Deadpool always lands on
+// his Vanguard variant first.
+const activeVariant = ref<Role | null>(null);
+
+watch(
+  () => props.hero,
+  (next) => {
+    activeVariant.value = next ? next.roles[0] : null;
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
@@ -78,16 +92,27 @@ const teamUps = [
       <header
         class="border-b border-white/5 px-6 py-5"
         :style="{
-          borderLeft: `4px solid ${roleColorVar[hero.role]}`,
+          borderLeft: `4px solid ${
+            activeVariant
+              ? roleColorVar[activeVariant]
+              : roleColorVar[hero.roles[0]]
+          }`,
         }"
       >
-        <div
-          class="flex items-center gap-2 text-xs font-bold
-                 uppercase tracking-widest"
-          :style="{ color: roleColorVar[hero.role] }"
-        >
-          <RoleIcon :role="hero.role" :size="14" />
-          {{ ROLE_LABEL[hero.role] }}
+        <div class="flex items-center gap-2 text-xs font-bold
+                    uppercase tracking-widest">
+          <template
+            v-for="r in hero.roles"
+            :key="r"
+          >
+            <span
+              class="flex items-center gap-1"
+              :style="{ color: roleColorVar[r] }"
+            >
+              <RoleIcon :role="r" :size="14" />
+              {{ ROLE_LABEL[r] }}
+            </span>
+          </template>
         </div>
         <h2
           class="font-display mt-2 text-3xl font-black uppercase
@@ -97,13 +122,55 @@ const teamUps = [
         </h2>
       </header>
 
+      <!-- Variant tab row (only for multi-role heroes) -->
+      <div
+        v-if="hero.roles.length > 1"
+        class="flex border-b border-white/5"
+        role="tablist"
+        aria-label="Hero variants"
+      >
+        <button
+          v-for="r in hero.roles"
+          :key="r"
+          type="button"
+          role="tab"
+          :aria-selected="activeVariant === r"
+          @click="activeVariant = r"
+          class="font-display relative flex flex-1 items-center
+                 justify-center gap-2 px-3 py-3 text-xs font-bold
+                 uppercase tracking-widest transition
+                 focus:outline-none focus-visible:ring-2
+                 focus-visible:ring-[color:var(--color-accent)]"
+          :class="
+            activeVariant === r
+              ? 'text-[color:var(--color-text-on-dark)]'
+              : 'text-[color:var(--color-text-on-dark-muted)] hover:text-[color:var(--color-text-on-dark)]'
+          "
+        >
+          <span :style="{ color: roleColorVar[r] }">
+            <RoleIcon :role="r" :size="14" />
+          </span>
+          {{ ROLE_LABEL[r] }}
+          <span
+            v-if="activeVariant === r"
+            aria-hidden="true"
+            class="absolute inset-x-3 -bottom-px h-0.5
+                   bg-[color:var(--color-accent)]"
+          />
+        </button>
+      </div>
+
       <section class="px-6 py-5">
         <h3
           class="font-display text-xs font-bold uppercase
                  tracking-widest
                  text-[color:var(--color-accent)]"
         >
-          Abilities
+          {{
+            hero.roles.length > 1 && activeVariant
+              ? `${ROLE_LABEL_UPPER[activeVariant]} Abilities`
+              : 'Abilities'
+          }}
         </h3>
         <ul class="mt-3 flex flex-col gap-3">
           <li

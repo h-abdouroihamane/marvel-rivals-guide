@@ -62,7 +62,6 @@ defineEmits<{
       <option value="vanguard">Vanguard</option>
       <option value="duelist">Duelist</option>
       <option value="strategist">Strategist</option>
-      <option value="flex">Flex</option>
     </select>
     <span
       aria-hidden="true"

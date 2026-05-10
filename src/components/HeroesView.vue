@@ -17,8 +17,9 @@ const roleFilter = ref<Role | 'all'>('all');
 const selectedSlug = ref<string | null>(null);
 
 const visible = computed(() => {
-  if (roleFilter.value === 'all') return heroes;
-  return heroes.filter((h) => h.role === roleFilter.value);
+  const filter = roleFilter.value;
+  if (filter === 'all') return heroes;
+  return heroes.filter((h) => h.roles.includes(filter));
 });
 
 const selectedHero = computed(() => {
