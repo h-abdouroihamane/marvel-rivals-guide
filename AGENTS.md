@@ -24,10 +24,12 @@ Key facts that drive every decision below:
 - **Persistence**: MySQL 8 (database `marvel_rivals_guide`), accessed
   via Laravel 12 Eloquent. Schema lives in `database/migrations/`.
 - **Hosting**: TBD.
-- **Theming**: dark only. The `useAppearance` composable still
-  exists but is not surfaced in the UI; the visual reference is
-  the official Marvel Rivals heroes page on marvelrivals.com. Must
-  meet WCAG AA.
+- **Theming**: light + dark, light is the default. Toggled via the
+  `useAppearance` composable; persisted in `localStorage`. The
+  visual reference is the official Marvel Rivals heroes page on
+  marvelrivals.com (light backdrop, dark cards). See
+  [docs/adr/0001-light-and-dark-themes.md](docs/adr/0001-light-and-dark-themes.md)
+  for the rationale. Must meet WCAG AA in both modes.
 - **Notifications**: none.
 
 ---
@@ -266,12 +268,12 @@ Sensible baseline:
   installed). For reusable variant patterns use
   `class-variance-authority`. Don't add a third utility for the same
   job.
-- **Theming**: dark only. Don't write `dark:` Tailwind variants —
-  the dark palette is the _only_ palette, expressed via plain
-  utilities (`bg-neutral-950`, `text-neutral-100`, etc.) sourced
-  from the Tailwind tokens in `app.css`. The `useAppearance`
-  composable still exists but is not surfaced; do not add a theme
-  toggle without an ADR from `lead-dev`.
+- **Theming**: light (default) + dark, toggled via `useAppearance`.
+  Use Tailwind `dark:` variants for every color / border /
+  background. Light values live at the root in `src/style.css` as
+  `@theme` tokens; `.dark` overrides them. See
+  [docs/adr/0001-light-and-dark-themes.md](docs/adr/0001-light-and-dark-themes.md).
+  Adding a third theme requires a new ADR.
 - Spacing scale: stick to Tailwind defaults. Arbitrary values only
   when the design genuinely demands it.
 
